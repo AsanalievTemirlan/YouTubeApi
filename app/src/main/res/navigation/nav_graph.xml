@@ -9,10 +9,23 @@
         android:id="@+id/playListFragment"
         android:name="com.example.youtubeapi.ui.fragment.play_list.PlayListFragment"
         android:label="fragment_play_list"
-        tools:layout="@layout/fragment_play_list" />
+        tools:layout="@layout/fragment_play_list" >
+        <action
+            android:id="@+id/action_playListFragment_to_videoFragment"
+            app:destination="@id/videoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/playerFragment"
         android:name="com.example.youtubeapi.ui.fragment.player.PlayerFragment"
         android:label="fragment_player"
         tools:layout="@layout/fragment_player" />
+    <fragment
+        android:id="@+id/videoFragment"
+        android:name="com.example.youtubeapi.ui.fragment.video.VideoFragment"
+        android:label="fragment_video"
+        tools:layout="@layout/fragment_video" >
+        <action
+            android:id="@+id/action_videoFragment_to_playerFragment"
+            app:destination="@id/playerFragment" />
+    </fragment>
 </navigation>
