@@ -9,14 +9,14 @@ import coil.load
 import com.example.youtubeapi.data.model.Item
 import com.example.youtubeapi.databinding.ItemPlaylistsBinding
 
-class PlaylistsAdapter(private var playlists: ArrayList<Item>) :
-    ListAdapter<Item, PlaylistsAdapter.PlayListViewHolder>(DiffCallback()) {
+class PlaylistsAdapter :
+    ListAdapter<Item, PlaylistsAdapter.PlaylistViewHolder>(PlaylistItemCallback()) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PlayListViewHolder {
-        return PlayListViewHolder(
+    ): PlaylistViewHolder {
+        return PlaylistViewHolder(
             ItemPlaylistsBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
@@ -24,13 +24,12 @@ class PlaylistsAdapter(private var playlists: ArrayList<Item>) :
             )
         )
     }
-    override fun getItemCount(): Int = playlists.size
 
-    override fun onBindViewHolder(holder: PlayListViewHolder, position: Int) {
-        holder.onBind(playlists[position])
+    override fun onBindViewHolder(holder: PlaylistViewHolder, position: Int) {
+        holder.onBind(getItem(position))
     }
 
-    inner class PlayListViewHolder(private val binding: ItemPlaylistsBinding) :
+    class PlaylistViewHolder(private val binding: ItemPlaylistsBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun onBind(playlists: Item) {
@@ -43,8 +42,7 @@ class PlaylistsAdapter(private var playlists: ArrayList<Item>) :
     }
 }
 
-class DiffCallback : DiffUtil.ItemCallback<Item>() {
+class PlaylistItemCallback : DiffUtil.ItemCallback<Item>() {
     override fun areItemsTheSame(oldItem: Item, newItem: Item) = oldItem.id == newItem.id
-    override fun areContentsTheSame(oldItem: Item, newItem: Item) =
-        oldItem == newItem && oldItem == newItem
+    override fun areContentsTheSame(oldItem: Item, newItem: Item) = oldItem == newItem
 }

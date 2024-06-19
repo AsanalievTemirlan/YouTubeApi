@@ -1,4 +1,7 @@
 package com.example.youtubeapi.ui.fragment.player
 
-class PlayerViewModel {
+import androidx.lifecycle.ViewModel
+
+class PlayerViewModel: ViewModel() {
+
 }
